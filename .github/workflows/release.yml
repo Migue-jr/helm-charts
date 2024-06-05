@@ -29,7 +29,9 @@ jobs:
 
       - name: Install Chart Releaser
         run: |
-          curl -sSL https://github.com/helm/chart-releaser/releases/download/v1.2.0/chart-releaser-linux-amd64.tar.gz | tar -xz -C /usr/local/bin
+          wget https://github.com/helm/chart-releaser/releases/download/v1.2.0/chart-releaser_1.2.0_linux_amd64.tar.gz
+          tar -xzf chart-releaser_1.2.0_linux_amd64.tar.gz -C /usr/local/bin
+          chmod +x /usr/local/bin/cr
 
       - name: Run Chart Releaser
         env:
