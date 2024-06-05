@@ -11,6 +11,9 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CR_TOKEN: ${{ secrets.CR_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,6 +29,8 @@ jobs:
 
       - name: Install Chart Releaser
         uses: helm/chart-releaser-action@v1.2.0
+        env:
+          CR_TOKEN: ${{ secrets.CR_TOKEN }}
 
       - name: Run Chart Releaser
         env:
