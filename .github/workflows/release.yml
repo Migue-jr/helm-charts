@@ -11,8 +11,6 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Asegurarse de que el token esté configurado
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -32,6 +30,7 @@ jobs:
       - name: Run Chart Releaser
         env:
           CR_TOKEN: ${{ secrets.CR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cr upload -o Migue-jr -r helm-charts -p charts
           cr index -o Migue-jr -r helm-charts -p charts
