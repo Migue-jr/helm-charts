@@ -43,7 +43,7 @@ jobs:
           CR_TOKEN: ${{ secrets.CR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cr upload -o Migue-jr -r helm-charts -p .cr-release-packages
+          cr upload -o Migue-jr -r helm-charts -p .cr-release-packages --release-name-template "{{ .Name }}-{{ .Version }}-$(date +'%Y%m%d%H%M%S')"
           cr index -o Migue-jr -r helm-charts -p .cr-release-packages --charts-repo https://github.com/Migue-jr/helm-charts/
 
       - name: Push index.yaml to GitHub Pages
