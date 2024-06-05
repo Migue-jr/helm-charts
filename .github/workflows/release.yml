@@ -11,6 +11,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Asegurarse de que el token esté configurado
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
