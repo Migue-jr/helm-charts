@@ -44,7 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cr upload -o Migue-jr -r helm-charts -p .cr-release-packages
-          cr index -o Migue-jr -r helm-charts -p .cr-release-packages
+          cr index -o Migue-jr -r helm-charts -p .cr-release-packages --charts-repo https://github.com/Migue-jr/helm-charts/
 
       - name: Push index.yaml to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
