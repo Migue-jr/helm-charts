@@ -38,6 +38,9 @@ jobs:
           mkdir -p .cr-release-packages
           helm package charts/* --destination .cr-release-packages
 
+      - name: Create .cr-index Directory
+        run: mkdir -p .cr-index
+
       - name: Run Chart Releaser
         env:
           CR_TOKEN: ${{ secrets.CR_TOKEN }}
