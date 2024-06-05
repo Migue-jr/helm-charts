@@ -1,0 +1,36 @@
+name: Release Charts
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v1
+
+      - name: Install Chart Releaser
+        uses: helm/chart-releaser-action@v1.2.0
+
+      - name: Run Chart Releaser
+        env:
+          CR_TOKEN: ${{ secrets.CR_TOKEN }}
+        run: |
+          cr upload -o Migue-jr -r helm-charts -p charts
+          cr index -o Migue-jr -r helm-charts -p charts
+
+      - name: Push index.yaml to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.CR_TOKEN }}
+          publish_dir: ./charts
+
