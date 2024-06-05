@@ -33,13 +33,18 @@ jobs:
           tar -xzf chart-releaser_1.2.0_linux_amd64.tar.gz -C /usr/local/bin
           chmod +x /usr/local/bin/cr
 
+      - name: Package Helm Charts
+        run: |
+          mkdir -p .cr-release-packages
+          helm package charts/* --destination .cr-release-packages
+
       - name: Run Chart Releaser
         env:
           CR_TOKEN: ${{ secrets.CR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cr upload -o Migue-jr -r helm-charts -p charts
-          cr index -o Migue-jr -r helm-charts -p charts
+          cr upload -o Migue-jr -r helm-charts -p .cr-release-packages
+          cr index -o Migue-jr -r helm-charts -p .cr-release-packages
 
       - name: Push index.yaml to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
