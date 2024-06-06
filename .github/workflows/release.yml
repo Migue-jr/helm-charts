@@ -55,5 +55,4 @@ jobs:
           github_token: ${{ secrets.CR_TOKEN }}
           publish_dir: .cr-index
           destination_dir: .
-          keep_files: true
 
